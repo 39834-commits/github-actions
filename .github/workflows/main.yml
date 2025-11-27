@@ -1,0 +1,23 @@
+name: Simple C++ CI
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install g++
+        run: sudo apt-get update && sudo apt-get install -y g++
+
+      - name: Build
+        run: |
+          g++ -std=c++17 -Wall -O2 code.cpp -o program
+
+      - name: Run program
+        run: ./program
